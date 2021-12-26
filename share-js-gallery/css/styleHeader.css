@@ -1,0 +1,232 @@
+
+/***************************************                       ***************************************/
+/***************************************         HEADER        ***************************************/
+/***************************************                       ***************************************/
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+a{
+    text-decoration: none;
+    color: white;
+    transition: 0.5s;
+}
+li{
+    list-style: none;
+}
+body{
+font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+/*<<<<<<<<<<<<<< HEADER >>>>>>>>>>>>>>*/
+
+
+
+
+.header{
+    display: flex;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 95px;
+    padding: 0 30px;
+    background-color: rgb(46, 46, 46);
+    box-shadow: 0px 2px 10px 0px #8f8f8f;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+    z-index: 1999;
+}
+.desktop-header-logo-container,
+.mobile-header-logo-container{
+    display: flex;
+    align-items: center;
+}
+.desktop-header-logo-img{               
+    width: 60px;
+    margin-left: -500px;
+    animation-name: slidingLogoAnimation;   
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    border-radius: 50%;
+}
+@keyframes slidingLogoAnimation{
+    0% {margin-left: -500px;}
+    50% {margin-left: 30px;}
+    70% {margin-left: -10px;}
+    90% {margin-left: 10px;}
+    100% {margin-left: 0px;}
+}
+.desktop-header-logo-text{
+    margin-left: 20px;
+}
+.desktop-header-logo-text,
+.mobile-header-logo-text{
+    color: transparent;
+    font-family: 'jokerman';
+    font-size: 30px;
+    animation-name: appearingLogoTextAnimation; 
+    animation-delay: 1.3s;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    flex-wrap: nowrap;
+    text-align: center;
+    border-bottom: 1px solid transparent;
+}
+@keyframes appearingLogoTextAnimation{
+    0% {color: transparent;}
+    55% {color: white;}
+    66% {border-bottom: 1px solid rgb(243, 151, 102);}
+    100% {color: white; border-bottom: 1px solid transparent;}
+}
+.desktop-header-linkwrapper{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+.desktop-header-linkwrapper a{
+    margin-left: 20px;
+    font-size: 18px;
+    white-space: nowrap; 
+}
+.desktop-header-linkwrapper a:hover{
+    animation-name: desktopLinkEffect;
+    animation-timing-function: linear;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    border-radius: 15%;
+}
+@keyframes desktopLinkEffect{
+    0% {transform: scale(100%); border-bottom: 2px solid transparent;}
+    100% {transform: scale(106%); border-bottom: 2px solid white;}
+}
+.mobile-menu{
+    display: flex;
+}
+
+/*------------- Media - Header */
+
+@media (min-width: 800px){
+    .mobile-header-logo-container,
+    .mobile-menu-button,
+    .mobile-header-linkwrapper{
+        display: none;
+    }
+}
+@media (max-width: 800px){ 
+    .desktop-header-logo-container,
+    .desktop-header-linkwrapper{
+        display: none;
+    }
+    .mobile-header-logo-container{
+        flex-direction: column;
+    }
+    .mobile-header-logo-img{               
+        width: 40px;
+        margin-left: -500px;
+        animation-name: slidingLogoAnimation;   
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        border-radius: 50%;
+    }  
+    @keyframes slidingLogoAnimation{
+        0% {margin-left: -500px;}
+        50% {margin-left: 30px;}
+        70% {margin-left: -20px;}
+        90% {margin-left: 20px;}
+        100% {margin-left: 0px;}
+    }
+    .mobile-header-logo-text{
+        font-size: 20px;
+    }
+    .mobile-menu-button{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70px;
+        height: 70px;
+        cursor: pointer;
+    }
+    .mobile-menu-button-burger{
+        width: 40px;
+        height: 4px;
+        background-color: white;
+
+    }
+    .mobile-menu-button-burger::before, 
+    .mobile-menu-button-burger::after{
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 4px;
+        background-color: white;
+        transition: 0.5s;
+    }
+    .mobile-menu-button-burger::before{
+        transform: translateY(-10px);
+    }
+    .mobile-menu-button-burger::after{
+        transform: translateY(10px);
+    }
+    .mobile-menu-button.open .mobile-menu-button-burger{ /*OM .open - ändra burger*/
+        transform: rotate(180deg);
+        background-color: transparent;
+    }
+    .mobile-menu-button.open .mobile-menu-button-burger::before{
+        transform: rotate(-135deg);
+    }
+    .mobile-menu-button.open .mobile-menu-button-burger::after{
+        transform: rotate(135deg);
+    }
+    .mobile-menu-button.open{
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border: 2px solid transparent;
+        border-radius: 50%;
+        animation-name: mobileMenuAnimation;
+        animation-fill-mode: forwards;
+        animation-delay: 0.5s;
+        animation-duration: 0.5s;
+    }
+    @keyframes mobileMenuAnimation {
+        0% {border: 2px solid transparent; border-radius: 50%;}
+        100% {border: 2px solid white; border-radius: 50%;}
+    }
+    .mobile-menu{
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        background-color: rgba(73, 73, 73, 0.8);
+        position: fixed;
+        right: -100%;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+        z-index: 1998;
+    }
+    .mobile-header-linkwrapper{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .mobile-header-linkwrapper a{
+        text-align: center;
+        text-shadow: 2px, 2px, black;
+        width: 100%;
+        padding: 10px;
+        font-size: 25px;
+        transition: 0.3s;
+    }
+    .mobile-header-linkwrapper a:hover{
+        background-color: rgb(129, 129, 129);
+    }
+}
